@@ -27,5 +27,7 @@ private:
   std::unique_ptr<MeterTile> masterTile;
   std::unique_ptr<MeterTile> truePeakTile;
 
+  juce::TextButton resetLufsButton { "Reset LUFS" };
+
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HalfMeterAudioProcessorEditor)
 };

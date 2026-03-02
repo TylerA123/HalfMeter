@@ -21,6 +21,17 @@ HalfMeterAudioProcessorEditor::HalfMeterAudioProcessorEditor(HalfMeterAudioProce
   for (auto* t : { integratedTile.get(), shortTermTile.get(), masterTile.get(), truePeakTile.get() })
     addAndMakeVisible(t);
 
+  addAndMakeVisible(resetLufsButton);
+  resetLufsButton.onClick = [this]
+  {
+    processor.requestLufsReset();
+  };
+
+  resetLufsButton.setColour(juce::TextButton::buttonColourId, juce::Colour(0xFF12151B));
+  resetLufsButton.setColour(juce::TextButton::buttonOnColourId, juce::Colour(0xFF12151B));
+  resetLufsButton.setColour(juce::TextButton::textColourOffId, juce::Colour(0xFFAAB2BF));
+  resetLufsButton.setMouseCursor(juce::MouseCursor::PointingHandCursor);
+
   setResizable(true, true);
   setSize(900, 500);
 
@@ -41,7 +52,11 @@ void HalfMeterAudioProcessorEditor::paint(juce::Graphics& g)
 void HalfMeterAudioProcessorEditor::resized()
 {
   auto r = getLocalBounds();
-  r.removeFromTop(90);
+
+  auto header = r.removeFromTop(80);
+  resetLufsButton.setBounds(header.removeFromRight(150).reduced(16, 22));
+
+  r.removeFromTop(10);
   r.reduce(24, 24);
 
   const int gap = 22;

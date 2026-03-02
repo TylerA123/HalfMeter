@@ -37,5 +37,5 @@
 
 ## Controls (v1)
 
-- Reset: resets integrated, LRA, and max/hold values
+- Reset LUFS: resets integrated LUFS + LRA (and clears M/S until they refill)
 - Freeze (optional): pauses meter updates and history scrolling

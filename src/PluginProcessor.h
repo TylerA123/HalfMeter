@@ -46,8 +46,11 @@ public:
 
   float getTruePeakDbtp(int channel) const noexcept;
 
+  void requestLufsReset() noexcept;
+
 private:
-  void recreateEburStateIfNeeded(double sampleRate, int channels);
+  void recreateLoudnessStateIfNeeded(double sampleRate, int channels);
+  void recreateTruePeakStateIfNeeded(double sampleRate, int channels);
 
   std::atomic<float> samplePeakDbfsL { -100.0f };
   std::atomic<float> samplePeakDbfsR { -100.0f };
@@ -60,9 +63,15 @@ private:
   std::atomic<float> truePeakDbtpL { -100.0f };
   std::atomic<float> truePeakDbtpR { -100.0f };
 
-  ebur128_state* ebur = nullptr;
-  unsigned long eburSampleRate = 0;
-  unsigned int eburChannels = 0;
+  ebur128_state* eburLoudness = nullptr;
+  unsigned long eburLoudnessSampleRate = 0;
+  unsigned int eburLoudnessChannels = 0;
+
+  ebur128_state* eburTruePeak = nullptr;
+  unsigned long eburTruePeakSampleRate = 0;
+  unsigned int eburTruePeakChannels = 0;
+
+  std::atomic<bool> lufsResetRequested { false };
 
   juce::HeapBlock<float> interleaved;
   int interleavedCapacityFrames = 0;
