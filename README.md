@@ -24,4 +24,12 @@ Design source: `docs/figma.md`
 
 ## Status
 
-This repo currently contains documentation and scaffolding. Code will be added next.
+## Build
+
+See `docs/dev-setup.md`.
+
+## Status
+
+- CMake + JUCE plugin skeleton is present (VST3 + Standalone)
+- Monitor UI is implemented with real LUFS + True Peak metering (libebur128)
+- Sample peak dBFS is measured and displayed as "Master Volume" (block peak)

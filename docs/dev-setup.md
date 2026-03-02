@@ -5,13 +5,37 @@ This project is intended to be a Windows-first VST3 plugin.
 ## Recommended stack
 
 - JUCE (plugin framework)
-- Steinberg VST3 SDK (via JUCE modules or standalone SDK)
+- Steinberg VST3 SDK (required by some JUCE setups)
 - Visual Studio 2022 (MSVC)
+- CMake 3.21+
+
+## Getting the source
+
+This repo uses CMake and fetches JUCE at configure time.
+
+## Build (Windows)
+
+From the repo root:
+
+```bat
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+cmake --build build --config Release
+```
+
+JUCE will produce artefacts under a path like:
+
+- `build/HalfMeter_artefacts/Release/VST3/HalfMeter.vst3`
+- `build/HalfMeter_artefacts/Release/Standalone/HalfMeter.exe`
+
+## VST3 SDK
+
+If CMake configure fails with a message about the VST3 SDK, install the Steinberg VST3 SDK and re-run configure with:
+
+```bat
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DVST3_SDK_PATH="C:/path/to/VST_SDK"
+```
 
 ## Next steps
 
-1. Create a JUCE Audio Plugin project named `HalfMeter` (VST3 enabled)
-2. Implement audio analysis (BS.1770 + True Peak) in the processor
-3. Implement the Monitor UI in the editor (dark theme, 4 tiles)
-
-When code is added, this doc will include exact build commands and paths.
+1. Replace placeholder LUFS/True Peak values with real metering (see `docs/spec.md`)
+2. Add Reset/Freeze controls and a shared snapshot model (see `docs/architecture.md`)
