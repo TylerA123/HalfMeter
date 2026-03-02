@@ -1,0 +1,27 @@
+# OS
+Thumbs.db
+Desktop.ini
+
+# Editors/IDEs
+.vs/
+.vscode/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+
+# Build outputs
+build/
+cmake-build-*/
+out/
+
+# JUCE / Projucer
+JuceLibraryCode/
+*.jucer
+
+# Plugin binaries
+*.vst3/
+*.dll
+*.pdb
+*.lib
+*.exp
